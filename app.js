@@ -40,7 +40,20 @@ const resolver = require('./graphql/resolvers');
 app.use('/graphql',graphqlHTTP({
   schema:graphqlSchema,
   rootValue:resolver,
-  graphiql:true
+  graphiql:true,
+  formatError(err){
+    if(!err.originalError) {
+      return err;
+    }
+    const data = err.originalError.data;
+    const message = err.message || 'An Error occurred';
+    const code = err.originalError.code || 500 ;
+    return {
+      message : message,
+      status : code,
+      data : data,
+    }
+  }
 }))
 app.use(morgan('tiny'))
 app.use(bodyParser.json()); // application/json
