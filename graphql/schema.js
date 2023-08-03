@@ -21,6 +21,7 @@ module.exports = buildSchema(`
         userId: String!
     }
     type Post {
+                _id:ID
                 title: String
                 imageUrl: String
                 content: String

@@ -7,7 +7,7 @@ const multer = require('multer');
 const morgan = require('morgan');
 const { graphqlHTTP } = require('express-graphql');
 // const dotenv = require('dotenv');
-
+const auth = require('./middleware/auth');
 
 // dotenv.config();
 
@@ -36,7 +36,9 @@ const fileFilter = (req, file, cb) => {
 const graphqlSchema = require('./graphql/schema');
 const resolver = require('./graphql/resolvers');
 
-// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
+
+app.use(auth);
+
 app.use('/graphql',graphqlHTTP({
   schema:graphqlSchema,
   rootValue:resolver,
