@@ -1,14 +1,9 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
 module.exports = {
-    hello() {
-        return {
-            text: "hello world",
-            views: 123
-        }
-    },
     createUser: async function({userInput} , req){
         const errors = [];
         if(!validator.isEmail(userInput.email)){
@@ -38,5 +33,27 @@ module.exports = {
         return {
             ...createdUser._doc , _id: createdUser._id.toString() 
         }
-    }
+    },
+    login : async function({email,password}){
+        const user = await User.findOne({email : email});
+        if(!user){
+            const err = new Error('User Not Found!');
+            err.code = 401;
+            throw err;
+        }
+        const isEqual = await bcrypt.compare(password , user.password);
+        if(!isEqual){
+            const err = new Error('Password is not correct!');
+            err.code = 401 ;
+            throw err;
+        }
+        const token = jwt.sign({
+            userId:user._id.toString(),
+            email:user.email,
+        }, 'supersecretkey', {expiresIn: '1h'});
+        return {
+            token : token,
+            userId:user._id.toString()
+        }
+    },
 }
