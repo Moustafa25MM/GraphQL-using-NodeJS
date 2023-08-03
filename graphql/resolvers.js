@@ -186,5 +186,28 @@ module.exports = {
             createdAt:updatedPost.createdAt.toISOString(),
             updatedAt:updatedPost.updatedAt.toISOString()
         }
+    },
+    deletePost : async function({id}, req){
+        if(!req.isAuth){
+            const error = new Error('Not authenicated!');
+            error.code = 401;
+            throw error;
+        }
+        const post = await Post.findById(id);
+        if( !post ){
+            const err = new Error('No Post Found');
+            err.code = 404;
+            throw err;
+        }
+        if(post.creator.toString() !== req.userId.toString()){
+            const err = new Error('Not Authorized');
+            err.code = 403;
+            throw err;
+        }
+        await Post.findByIdAndRemove(id);
+        const user = await User.findById(req.userId);
+        user.posts.pull(id);
+        await user.save();
+        return true;
     }
 }
