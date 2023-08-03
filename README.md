@@ -18,7 +18,7 @@ npm i
 
 ### Register
 ```python
-1. endpoint = http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint = http://localhost:3000/graphql   "Or any port of your choice"
 2. Provide the following example json in the body :
 {
   "query": "mutation { createUser(userInput: { name: \"user\", email: \"user1@gmail.com\", password: \"tester\" }) {  _id  email name } }"
@@ -37,7 +37,7 @@ It will return an object like this:
 
 ### Login
 ```python
-1. endpoint = http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint = http://localhost:3000/graphql   "Or any port of your choice"
 2. Provide the following example json in the body :
 {
     "query": "query { login (email:\"user1@gmail.com\", password:\"tester\") { token userId  } }"
@@ -56,7 +56,7 @@ It will return an object like this:
 
 ### Create post
 ```python
-1. endpoint =  http://localhost:4000/graphql/   "Or any port of your choice"
+1. endpoint =  http://localhost:3000/graphql/   "Or any port of your choice"
 2. you provide an Authorization token in the headres 
 
 2. Provide the following example json in the body :
@@ -83,7 +83,7 @@ It will return an object like this:
 ```
 ### get Posts
 ```python
-1. endpoint =  http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint =  http://localhost:3000/graphql   "Or any port of your choice"
 2. you provide an Authorization token in the headres 
 
 3. Provide the following example json in the body :
@@ -124,7 +124,7 @@ It will return an object like this:
 ```
 ### get PostById
 ```python
-1. endpoint =    http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint =    http://localhost:3000/graphql   "Or any port of your choice"
 2. you provide an Authorization token in the headres 
 
 3. Provide the following example json in the body :
@@ -143,7 +143,7 @@ It will return an object like this:
 ```
 ### update Jogging
 ```python
-1. endpoint =    http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint =    http://localhost:3000/graphql   "Or any port of your choice"
 2. you provide an Authorization token in the headres 
 
 3. Provide the following example json in the body :
@@ -170,7 +170,7 @@ It will return an object like this:
 ```
 ### delete post
 ```python
-1. endpoint =    http://localhost:4000/graphql   "Or any port of your choice"
+1. endpoint =    http://localhost:3000/graphql   "Or any port of your choice"
 2. you provide an Authorization token in the headres 
 
 3. Provide the following example json in the body :
